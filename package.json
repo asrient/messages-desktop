@@ -13,7 +13,7 @@
   "build": {
     "appId": "asrient.messages.desktop",
     "productName": "Messages",
-    "asar": false,
+    "asar": true,
     "copyright": "@ASRIENT",
     "win": {
       "target": [
