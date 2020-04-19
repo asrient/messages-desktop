@@ -1,0 +1,47 @@
+{
+  "name": "messages-desktop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "electron index.js",
+    "test": "electron test.js",
+    "install_deps": "electron-builder install-app-deps",
+    "build": "electron-builder build --win",
+    "build_linux": "electron-builder build --linux"
+  },
+  "build": {
+    "appId": "asrient.messages.desktop",
+    "productName": "Messages",
+    "asar": false,
+    "copyright": "@ASRIENT",
+    "win": {
+      "target": [
+        "appx",
+        "msi"
+      ],
+      "icon": "icon.ico",
+      "publisherName": "ASRIENT"
+    },
+    "linux": {
+      "target": "deb",
+      "maintainer": "asrient",
+      "executableName": "pine",
+      "icon": "./assets/icon.png",
+      "synopsis": "Run Pine apps on your computer",
+      "category": "Utility",
+      "desktop": "./assets/info.desktop"
+    }
+  },
+  "author": "ASRIENT",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^8.2.3"
+  },
+  "dependencies": {
+    "component-emitter": "^1.3.0",
+    "data-store": "^4.0.3",
+    "multicast-dns": "^7.2.2",
+    "nedb": "^1.8.0"
+  }
+}
