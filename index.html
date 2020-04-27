@@ -30,7 +30,10 @@
   const Datastore = require('nedb');
   const airPeer = require('./airPeer/lib.js');
   const ds = require('data-store');
+  const fs = require('fs');
+  const Resources = require('./resources.js');
   const dbDir = electron.remote.app.getAppPath("userData") + '/db';
+  const filesDir = electron.remote.app.getAppPath("userData") + '/files';
   window.peers = new Datastore({
     filename: dbDir + '/peers.json',
     autoload: true
@@ -42,6 +45,7 @@
   window.info = ds({
     path: dbDir + '/info.json'
   });
+  window.resources = new Resources(dbDir + '/resources.json');
 </script>
 
 <script type="text/javascript" src="bundle://messages.js"></script>

@@ -3,17 +3,17 @@ const { app, BrowserWindow } = require('electron')
 function createWindow() {
     // Create the browser window.
     const win = new BrowserWindow({
-        width: 400,
-        height: 650,
+        width: 800,
+        height: 500,
         show: false,
         transparent: false,
         opacity: 1,
         title: app.name,
         minHeight: 600,
         minWidth: 370,
-        maxHeight: 650,
-        maxWidth: 400,
-        maximizable:false,
+        //maxHeight: 650,
+        //maxWidth: 400,
+       // maximizable:false,
         frame: false,
         //backgroundColor: "#ffffff12",
         icon: "./icon.ico",
