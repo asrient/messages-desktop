@@ -26,7 +26,9 @@
 </script>
 
 <script type="text/javascript">
+  const MIME = require('mime-types');
   const crypto = require('crypto');
+  const path = require('path');
   const Datastore = require('nedb');
   const airPeer = require('./airPeer/lib.js');
   const ds = require('data-store');
@@ -34,6 +36,16 @@
   const Resources = require('./resources.js');
   const dbDir = electron.remote.app.getAppPath("userData") + '/db';
   const filesDir = electron.remote.app.getAppPath("userData") + '/files';
+  const dirs = {
+    pictures: electron.remote.app.getPath('pictures'),
+    downloads: electron.remote.app.getPath('downloads'),
+    temp: electron.remote.app.getPath('temp'),
+    videos: electron.remote.app.getPath('videos'),
+    userData: electron.remote.app.getPath('userData'),
+    home: electron.remote.app.getPath('home'),
+    desktop: electron.remote.app.getPath('desktop'),
+    music: electron.remote.app.getPath('music'),
+  }
   window.peers = new Datastore({
     filename: dbDir + '/peers.json',
     autoload: true
