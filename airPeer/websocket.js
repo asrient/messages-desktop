@@ -190,7 +190,7 @@ var api = {
 
         const send = () => {
             if (offset < last) {
-                console.log("---sending a chunk---");
+                //console.log("---sending a chunk---");
                 end = offset + frameSize - 50;//
                 if (end > last) {
                     end = last;
@@ -201,11 +201,11 @@ var api = {
                     fin = true;
                 }
                 var frm = frame.build(fin, key, chunk);
-                console.log('FIN', fin);
-                console.log('KEY', key.toString());
+                //console.log('FIN', fin);
+                //console.log('KEY', key.toString());
                 this.write(frm);
                 offset = end;
-                console.log('--------------------')
+                //console.log('--------------------')
             }
             else
                 console.error('local: offset > last', offset, last);
@@ -233,13 +233,13 @@ var api = {
         }
     },
     request: function (to, keyStr, body = null) {
-        console.log('-----building new request-------');
+        //console.log('-----building new request-------');
         var key = Buffer.from(keyStr);
         var msg = message.build({ type: 'request', to, body });
         this.sendFrame(key, msg);
     },
     reply: function (to, keyStr, status = 200, body = null) {
-        console.log('-----building new response-------');
+        //console.log('-----building new response-------');
         var key = Buffer.from(keyStr);
         var msg = message.build({ type: 'response', to, status, body });
         this.sendFrame(key, msg)
