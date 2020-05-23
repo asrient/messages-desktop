@@ -169,6 +169,11 @@ var api = {
         }
         this.isInit = true;
     },
+    getAirId: function () {
+        if (this.uid != null && this.host != null && this.sessionId != null)
+            return this.uid + ':' + this.host + ':' + this.sessionId;
+        else return null;
+    },
     stop: function () {
         this.isUpgraded = false;
         this.sessionId = null;
@@ -213,7 +218,7 @@ var api = {
                 schedule();
             }
         }
-        
+
         if (msg.length > frameSize) {
             //size too large to be sent together, break them up!
             console.log('size too large to be sent together, break them up!');

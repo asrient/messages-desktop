@@ -368,6 +368,11 @@ var api = {
             setInterval(broadcast, 2000);
         });
     },
+    getAirId: function () {
+        if (this.uid != null && this.host != null && this.sessionId != null)
+            return this.uid + ':' + this.host + ':' + this.sessionId;
+        else return null;
+    },
     request: function (to, key, body = null) {
         var from = this.uid + ':' + this.host + ':' + this.sessionId;
         getPeerAddresses(to).forEach((rec) => {
@@ -381,9 +386,9 @@ var api = {
         })
     },
     getPeers: function () {
-        var peers=[]
-        Object.keys(airBook).forEach((airId)=>{
-            if(airBook[airId].address!=null){
+        var peers = []
+        Object.keys(airBook).forEach((airId) => {
+            if (airBook[airId].address != null) {
                 peers.push(airBook[airId]);
             }
         })
