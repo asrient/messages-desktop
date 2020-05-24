@@ -16,7 +16,6 @@ function createWindow() {
         //maxWidth: 400,
         // maximizable:false,
         frame: false,
-        //backgroundColor: "#ffffff12",
         icon: "./icon.ico",
         webPreferences: {
             nodeIntegration: true,
@@ -59,7 +58,9 @@ function createWindow() {
 
 function checkUpates() {
     console.log('checking for updates...');
-    autoUpdater.checkForUpdatesAndNotify();
+    autoUpdater.checkForUpdatesAndNotify().catch(err => {
+        console.error(err)
+    })
 }
 
 ipcMain.on('install_update', () => {
@@ -68,6 +69,10 @@ ipcMain.on('install_update', () => {
 
 ipcMain.on('check_update', () => {
     checkUpates();
+});
+
+autoUpdater.on('error', (err) => {
+    console.log('Update error:',err);
 });
 
 // This method will be called when Electron has finished

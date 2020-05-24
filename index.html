@@ -36,8 +36,8 @@
   const sharp = require('sharp');
   const fs = require('fs');
   const Resources = require('./resources.js');
-  const dbDir = electron.remote.app.getAppPath("userData") + '/db';
-  const filesDir = electron.remote.app.getAppPath("userData") + '/files';
+  const dbDir = electron.remote.app.getPath("userData") + '/db';
+  const filesDir = electron.remote.app.getPath("userData") + '/files';
   const dirs = {
     pictures: electron.remote.app.getPath('pictures'),
     downloads: electron.remote.app.getPath('downloads'),
