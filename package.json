@@ -1,5 +1,5 @@
 {
-  "name": "messages-desktop",
+  "name": "messages",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -22,7 +22,6 @@
     "copyright": "@ASRIENT",
     "win": {
       "target": [
-        "appx",
         "msi"
       ],
       "icon": "icon.ico",
