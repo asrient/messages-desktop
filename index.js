@@ -23,22 +23,25 @@ function createWindow() {
         }
     })
 
+    const installDir = app.getAppPath();
+    const filesDir = app.getPath("userData") + '/files';
+
     win.webContents.session.protocol.registerFileProtocol('assets', (req, cb) => {
         var url = req.url.substr(9);
-        cb('./assets/' + url);
+        cb(installDir + '/assets/' + url);
     })
 
     win.webContents.session.protocol.registerFileProtocol('bundle', (req, cb) => {
         var url = req.url.substr(9);
-        cb('./bundle/' + url);
+        cb(installDir + '/bundle/' + url);
     })
 
     win.webContents.session.protocol.interceptFileProtocol('files', (req, cb) => {
         var url = req.url.substr(8);
-        cb('./files/' + url);//
+        cb(filesDir + '/' + url);
     })
 
-    win.loadFile('./index.html');
+    win.loadFile(installDir + '/index.html');
     //win.webContents.openDevTools()
 
     win.once('ready-to-show', () => {
@@ -72,7 +75,7 @@ ipcMain.on('check_update', () => {
 });
 
 autoUpdater.on('error', (err) => {
-    console.log('Update error:',err);
+    console.log('Update error:', err);
 });
 
 // This method will be called when Electron has finished
