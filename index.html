@@ -48,10 +48,19 @@
     desktop: electron.remote.app.getPath('desktop'),
     music: electron.remote.app.getPath('music'),
   }
+  const VERSION = electron.remote.app.getVersion();
   window.peers = new Datastore({
     filename: dbDir + '/peers.json',
     autoload: true
   });
+  window.updates = {
+    check: function () {
+      electron.ipcRenderer.send('check_update');
+    },
+    install: function () {
+      electron.ipcRenderer.send('install_update');
+    }
+  }
   window.chats = new Datastore({
     filename: dbDir + '/chats.json',
     autoload: true

@@ -1,11 +1,12 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron');
+const { autoUpdater } = require("electron-updater");
 
 function createWindow() {
     // Create the browser window.
     const win = new BrowserWindow({
         width: 800,
         height: 500,
-        show: false,
+        //show: false,
         transparent: false,
         opacity: 1,
         title: app.name,
@@ -13,7 +14,7 @@ function createWindow() {
         minWidth: 370,
         //maxHeight: 650,
         //maxWidth: 400,
-       // maximizable:false,
+        // maximizable:false,
         frame: false,
         //backgroundColor: "#ffffff12",
         icon: "./icon.ico",
@@ -27,22 +28,47 @@ function createWindow() {
         var url = req.url.substr(9);
         cb('./assets/' + url);
     })
-    
+
     win.webContents.session.protocol.registerFileProtocol('bundle', (req, cb) => {
         var url = req.url.substr(9);
         cb('./bundle/' + url);
     })
-    
+
     win.webContents.session.protocol.interceptFileProtocol('files', (req, cb) => {
         var url = req.url.substr(8);
-            cb('./files/' + url);//
+        cb('./files/' + url);//
     })
-    
+
     win.loadFile('./index.html');
     //win.webContents.openDevTools()
+
+    win.once('ready-to-show', () => {
+        checkUpates();
+    });
+
+    autoUpdater.on('update-available', () => {
+        console.log('Update available!');
+        win.webContents.send('update_available');
+    });
+
+    autoUpdater.on('update-downloaded', () => {
+        console.log('Update downloaded!');
+        win.webContents.send('update_downloaded');
+    });
 }
 
+function checkUpates() {
+    console.log('checking for updates...');
+    autoUpdater.checkForUpdatesAndNotify();
+}
 
+ipcMain.on('install_update', () => {
+    autoUpdater.quitAndInstall();
+});
+
+ipcMain.on('check_update', () => {
+    checkUpates();
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
